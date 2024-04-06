@@ -1,0 +1,53 @@
+.dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #f4e4bc; /* A parchment-like background */
+  border: 4px solid #8c6d48; /* A wooden-like border */
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: "Times New Roman", serif;
+  color: #3a2718; /* Text color inspired by ancient manuscripts */
+  text-align: center;
+}
+
+.dialog-content h3 {
+  margin: 0 0 20px 0;
+  line-height: 1.5;
+  color: #5d432c; /* Darker shade for headers */
+}
+
+.button {
+  padding: 10px 15px;
+  background-color: #8c6d48; /* Button color that matches the theme */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 0 10px; /* Adds horizontal space around the button */
+}
+
+.button:hover {
+  background-color: #a3825f; /* A slightly lighter shade for hover */
+}
+
+#buttonContinue:hover {
+  background-color: #4caf50; /* Green color when hovered */
+}
+
+#buttonStop:hover {
+  background-color: #ff6347; /* Green color when hovered */
+}
+
+#buttonContinue {
+  margin-right: 20px; /* Adds space to the right of the "continue" button */
+}
+
+#buttonStop {
+  margin-left: 20px; /* Adds space to the left of the "stop" button */
+}
