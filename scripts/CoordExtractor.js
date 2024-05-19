@@ -2,6 +2,7 @@ let tag = "extractCoord";
 let scriptName = "Coord Extractor";
 
 function main() {
+  console.log("teste");
   if ($(`#${tag}_popup_container`).length) {
     UI.ErrorMessage("Script has already been loaded, reload the page before calling it again");
     return;
@@ -112,7 +113,7 @@ function setHTML() {
 }
 
 function closePopup() {
-  $(`#${scriptTag}_popup_container`).remove();
+  $(`#${tag}_popup_container`).remove();
 }
 
 function focusSelect() {
