@@ -16,7 +16,7 @@ function setHTML() {
   <div class="popup_content" id="${tag}_popup_contentContainer">
     <a class="popup_box_close tooltip-delayed" id="${tag}_popup_cross" href="javascript:void(0)"></a>
     <div id="${tag}_popup_content">
-      <h3 class="centered">${scriptName}</h3>
+      <h3>${scriptName}</h3>
       <textarea id="${tag}_coordsText" placeholder="Paste text with coordinates here..." rows="4"></textarea>
       <div class="options">
         <div class="checkbox-group">
@@ -62,7 +62,7 @@ function setHTML() {
   overflow: auto;
 }
 
-#${tag}_popup_content p,h3 {
+#${tag}_popup_content p, #${tag}_popup_content h3 {
     text-align: center;
 }
 
