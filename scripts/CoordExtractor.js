@@ -1,18 +1,15 @@
-let tag = "extractCoord";
-let scriptName = "Coord Extractor";
-
 function main() {
-  console.log("teste");
+  let tag = "extractCoord";
+  let scriptName = "Coord Extractor";
+
   if ($(`#${tag}_popup_container`).length) {
     UI.ErrorMessage("Script has already been loaded, reload the page before calling it again");
     return;
   }
-  setHTML();
+  setHTML(tag, scriptName);
 }
 
-function setHTML() {
-  console.log("teste");
-
+function setHTML(tag, scriptName) {
   let html = `<div id="${tag}_popup_container" class="${tag}_popup_container">
   <div class="popup_content" id="${tag}_popup_contentContainer">
     <a class="popup_box_close tooltip-delayed" id="${tag}_popup_cross" href="javascript:void(0)"></a>
@@ -109,7 +106,7 @@ function setHTML() {
   $(`#${tag}_popup_container`).draggable();
   $(`#${tag}_popup_cross`).click(closePopup);
   $(`#${tag}_popup_container`).find("textarea").click(focusSelect);
-  $(`#${tag}_extract`).click(initiateCoordExtracting);
+  $(`#${tag}_extract`).click(initiateCoordExtracting(tag));
 }
 
 function closePopup() {
@@ -121,7 +118,7 @@ function focusSelect() {
   this.select();
 }
 
-function initiateCoordExtracting() {
+function initiateCoordExtracting(tag) {
   const regexPattern = /\d{3}\|\d{3}/g;
   const canExcludeDuplicates = document.getElementById(`${tag}_removeDuplicates`).checked;
   const canEnableLineBreaks = document.getElementById(`${tag}_breakLines`).checked;
