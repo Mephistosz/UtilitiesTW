@@ -94,7 +94,7 @@ function setHTML() {
     padding-bottom:5px;
   }
 
-input[type="text"] {
+.delimiter-group input[type="text"] {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
