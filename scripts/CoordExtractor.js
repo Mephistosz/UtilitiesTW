@@ -104,12 +104,16 @@ function setHTML(tag, scriptName) {
 
   $("body").append(html);
   $(`#${tag}_popup_container`).draggable();
-  $(`#${tag}_popup_cross`).click(closePopup);
+  $(`#${tag}_popup_cross`).click(function () {
+    closePopup(tag);
+  });
   $(`#${tag}_popup_container`).find("textarea").click(focusSelect);
-  $(`#${tag}_extract`).click(initiateCoordExtracting(tag));
+  $(`#${tag}_extract`).click(function () {
+    initiateCoordExtracting(tag);
+  });
 }
 
-function closePopup() {
+function closePopup(tag) {
   $(`#${tag}_popup_container`).remove();
 }
 
