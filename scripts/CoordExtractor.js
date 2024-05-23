@@ -16,6 +16,7 @@ function setHTML(tag, scriptName) {
     <div id="${tag}_popup_content">
       <h3>${scriptName}</h3>
       <textarea id="${tag}_coordsText" placeholder="Paste text with coordinates here..." rows="4"></textarea>
+      <div id="coordCounter" class="counter">0 coordinates extracted</div>
       <div class="options">
         <div class="checkbox-group">
           <label>
@@ -37,7 +38,6 @@ function setHTML(tag, scriptName) {
   </div>
 </div>
 <style>
-
 .${tag}_popup_container {
   display: inline-block;
   border: 30px solid #804000;
@@ -49,8 +49,8 @@ function setHTML(tag, scriptName) {
 }
 
 .popup_content {
-    background-image: url('/graphic/popup/content_background.png');
-  }
+  background-image: url('/graphic/popup/content_background.png');
+}
 
 #${tag}_popup_content textarea {
   width: 100%;
@@ -61,14 +61,20 @@ function setHTML(tag, scriptName) {
 }
 
 #${tag}_popup_content p, #${tag}_popup_content h3 {
-    text-align: center;
+  text-align: center;
+}
+
+.counter {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 .options {
   display: flex;
   justify-content: space-around;
   align-items: baseline;
-  flex-direction:row;
+  flex-direction: row;
   margin-top: 15px;
   padding-top: 15px;
   border-top: 1px solid #ccc;
@@ -84,13 +90,13 @@ function setHTML(tag, scriptName) {
   display: flex;
   position: relative;
   flex-direction: column;
-  text-align:center;
+  text-align: center;
   top: -7px;
 }
 
 .delimiter-group label {
-    padding-bottom:5px;
-  }
+  padding-bottom: 5px;
+}
 
 .delimiter-group input[type="text"] {
   padding: 8px;
@@ -99,7 +105,6 @@ function setHTML(tag, scriptName) {
   box-sizing: border-box;
   width: 100px;
 }
-
 </style>`;
 
   $("body").append(html);
@@ -132,6 +137,7 @@ function initiateCoordExtracting(tag) {
 
   textArea.value = coords || "No coords found";
   textArea.select();
+  updateCounter(coords, regexPattern);
 }
 
 function extractCoordinates(text, regexPattern, canExcludeDuplicates, canEnableLineBreaks, delimiter) {
@@ -139,6 +145,11 @@ function extractCoordinates(text, regexPattern, canExcludeDuplicates, canEnableL
   matches = canExcludeDuplicates ? [...new Set(matches)] : matches;
   const finalDelimiter = canEnableLineBreaks ? `${delimiter}\n` : delimiter;
   return matches.join(finalDelimiter);
+}
+
+function updateCounter(coords, regexPattern) {
+  const matches = [...coords.matchAll(regexPattern)].map((m) => m[0]);
+  document.getElementById("coordCounter").textContent = `${matches.length} coordinates extracted`;
 }
 
 main();
