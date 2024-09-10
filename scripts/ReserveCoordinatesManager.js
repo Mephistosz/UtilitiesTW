@@ -140,7 +140,7 @@ async function fetchTribalWarsData(villageSourceId, coordInput, requestId, respo
 
     await Promise.all(nestedRequests);
   } catch (error) {
-    console.error("There has been a problem with your fetch operation:", error);
+    console.error("There has been a problem with your fetch operation: ", error);
   }
 }
 
