@@ -18,17 +18,17 @@
   let exportPanel = null;
   let isProcessing = false;
 
-  // Remove existing elements to prevent duplicates
+  // Remove elementos existentes para evitar duplicação
   document.querySelectorAll('#twExportPanel, #twExportToggle').forEach((el) => el.remove());
 
-  // Helper: Create styled DOM element
+  // Helper: Cria um elemento DOM com estilos personalizados
   const createElement = (tag, styles = {}) => {
     const el = document.createElement(tag);
     Object.assign(el.style, styles);
     return el;
   };
 
-  // Helper: Display status message
+  // Helper: Exibe uma mensagem de status
   const showStatus = (message, isError = false) => {
     const status = exportPanel.querySelector('.status');
     status.textContent = message;
@@ -37,7 +37,7 @@
     setTimeout(() => (status.style.display = 'none'), 2000);
   };
 
-  // Helper: Extract member names from table rows
+  // Helper: Extrai nomes dos membros a partir das linhas da tabela
   const getMemberNames = () => {
     const rows = document.querySelectorAll('.row_a, .row_b');
     if (!rows.length) throw new Error('No member rows found');
@@ -49,7 +49,7 @@
       .filter((name) => name.length > 0);
   };
 
-  // Action: Extract and display member names
+  // Ação: Extrai e exibe os nomes dos membros
   const extractMembers = (textarea) => {
     if (isProcessing) return;
     isProcessing = true;
@@ -65,7 +65,7 @@
     }
   };
 
-  // UI: Create header with close button
+  // UI: Cria o cabeçalho com botão de fechar
   const createHeader = (onClose) => {
     const header = createElement('div', {
       background: TW_STYLE.headerBg,
@@ -91,7 +91,7 @@
     return header;
   };
 
-  // UI: Create textarea for member list
+  // UI: Cria a textarea para exibir a lista de membros
   const createTextarea = () =>
     createElement('textarea', {
       width: '100%',
@@ -106,7 +106,7 @@
       boxSizing: 'border-box',
     });
 
-  // UI: Create styled button
+  // UI: Cria um botão estilizado
   const createTWButton = (text, action) => {
     const btn = createElement('button', {
       background: TW_STYLE.buttonBg,
@@ -125,7 +125,7 @@
     return btn;
   };
 
-  // UI: Create control buttons
+  // UI: Cria os botões de controle
   const createControls = (textarea) => {
     const controls = createElement('div', { display: 'flex', justifyContent: 'space-between' });
     controls.append(
@@ -141,14 +141,14 @@
     return controls;
   };
 
-  // UI: Create status display
+  // UI: Cria o display de status
   const createStatus = () => {
     const status = createElement('div', { display: 'none', fontSize: '12px', marginTop: '8px' });
     status.className = 'status';
     return status;
   };
 
-  // Main: Build and initialize the export panel
+  // Main: Constrói e inicializa o painel de exportação
   const buildExportPanel = () => {
     const toggleBtn = createElement('button', {
       position: 'fixed',
@@ -193,6 +193,19 @@
     document.body.append(toggleBtn, exportPanel);
   };
 
-  // Start on page load
-  window.addEventListener('load', buildExportPanel);
+  // Função principal para inicializar o script
+  function main() {
+    buildExportPanel();
+  }
+
+  // Garante que o script execute após o carregamento completo do DOM
+  if (window.jQuery) {
+    $(document).ready(main);
+  } else {
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      main();
+    } else {
+      window.addEventListener('DOMContentLoaded', main);
+    }
+  }
 })();
